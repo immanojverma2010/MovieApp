@@ -8,7 +8,8 @@ var MovieDetailsSchema = new Schema({
   Year: String,
   imdbID: String,
   Type: String,
-  genre: String
+  genre: String,
+  comments: String
 });
 
 movieDb=mongoose.model('MovieDetails',MovieDetailsSchema);

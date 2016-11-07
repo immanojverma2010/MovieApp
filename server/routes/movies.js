@@ -52,6 +52,8 @@ var cursor=db.collection('moviedetails').find({},{__v:false, _id:false});
 router.route("/favmovies")
   .post(function(req,res){
 if(req.body){
+  req.body.comments="No comments yet....(Default movie comments)"
+
 var movieData=new favmovie(req.body);
   movieData.save(function(err){
     if(err){
@@ -77,11 +79,11 @@ router.post('/s', function(req, res, next) {
 
 
 /* PUT movies listing. */
-router.route("/updatemovies/:title")
+router.route("/updatemovies")
   .put( function (req, res) {
     //console.log(req.params.title);
     //console.log(req.body.imdbID);
-      favmovie.update({Title:req.params.title}, {imdbID:req.body.imdbID },function (err){
+      favmovie.update({imdbID:req.body.imdbID}, {comments:req.body.comments },function (err){
           if(err){
             console.log(err);
           }

@@ -26233,12 +26233,26 @@ removeDelete:function(imdbID){
 this.setState({savedMovies:temp})
 },
 
+updateComments:function(obj){
+  var temp=this.state.savedMovies;
+  for(var i=0;i<temp.length;i++){
+  if(temp[i].imdbID==obj.imdbID){
+    temp[i].comments=obj.comments;
+    break;
+  }
+}
+this.setState({savedMovies:temp})
+},
+
+
+
   render: function(){
 console.log(this.state.savedMovies);
 
       var deleteId = this.removeDelete;
+      var updateComm=this.updateComments;
       var savedMoviesArr=this.state.savedMovies.map(function(movie){
-      return(React.createElement(SavedMovieLayout, {deleteByIdRef: deleteId, movieObject: movie}));
+      return(React.createElement(SavedMovieLayout, {deleteByIdRef: deleteId, movieObject: movie, updateByIdRef: updateComm}));
     });
       return(
         React.createElement("div", {className: "container"}, 
@@ -26426,23 +26440,19 @@ var React= require('react');
 var SavedMovieLayout= React.createClass({displayName: "SavedMovieLayout",
 
   deleteMovie(){
-  /*addMovie: function(){}*/
+    /*addMovie: function(){}*/
     alert('Entering- Deleting movie');
     var url="http://localhost:8080/movies/deletemovies/"+this.props.movieObject.imdbID;
     //var deleteObject=this.props.movieObject;
-var deleteById=this.props.deleteByIdRef.bind(null,this.props.movieObject.imdbID);
 
+    var deleteById=this.props.deleteByIdRef.bind(null,this.props.movieObject.imdbID);
     $.ajax({
       url:url,
       type:'DELETE',
-
-
       success: function(data){
         deleteById();
         console.log("movie Deleting" +data);
-
       }.bind(this),
-
       error: function(err){
         console.log(err);
       }.bind(this)
@@ -26450,7 +26460,39 @@ var deleteById=this.props.deleteByIdRef.bind(null,this.props.movieObject.imdbID)
     });
   },
 
+  updateComment(){
+    var com = prompt("Enter comment",this.props.movieObject.comments);
+    if(com!=null && com!="" ){
 
+      if(com!=this.props.movieObject.comments){
+        alert('Entering- update  movie');
+        var obj = {imdbID:this.props.movieObject.imdbID,comments:com};
+        var updateById=this.props.updateByIdRef.bind(null,obj);
+        var url="http://localhost:8080/movies/updatemovies"
+        $.ajax({
+          url:url,
+          type:'PUT',
+          data:obj,
+          success: function(data){
+            /*for re-rendering*/
+            updateById();
+            console.log("comments updating" +data);
+          }.bind(this),
+          error: function(err){
+            console.log(err);
+          }.bind(this)
+
+        });
+
+      }
+
+    }
+    else if(com==""){
+      alert("Comments can't be empty");
+    }
+
+
+  },
 
   render: function(){
     link="http://www.imdb.com/title/"+this.props.movieObject.imdbID;
@@ -26466,15 +26508,15 @@ var deleteById=this.props.deleteByIdRef.bind(null,this.props.movieObject.imdbID)
       React.createElement("br", null), "    ", React.createElement("br", null), "     ", React.createElement("br", null), "     ", React.createElement("br", null), 
       React.createElement("br", null), "     ", React.createElement("br", null), "       ", React.createElement("br", null), "      ", React.createElement("br", null), 
       React.createElement("br", null), "     ", React.createElement("br", null), "       ", React.createElement("br", null), "      ", React.createElement("br", null), 
-      React.createElement("br", null), "     ", React.createElement("br", null), "       ", React.createElement("br", null), "      ", React.createElement("br", null), 
+      React.createElement("h3", null, "Comments:"), React.createElement("p", null, this.props.movieObject.comments, " "), 
       React.createElement("br", null), "     ", React.createElement("br", null), 
-    "Year of Release:  ", React.createElement("h3", null, this.props.movieObject.Year), 
-    React.createElement("a", {href: link, className: "btn btn-primary", target: "_blank"}, "see on IMDB"), "  ", 
-    React.createElement("button", {onClick: this.openModal}, "Open Modal"), "  ", 
-    React.createElement("button", {onClick: this.deleteMovie, className: "btn btn-warning"}, "Delete from favourite")
-    )
-    ), React.createElement("br", null), React.createElement("hr", null)
-    )
+      "Year of Release:  ", React.createElement("h3", null, this.props.movieObject.Year), 
+      React.createElement("a", {href: link, className: "btn btn-primary", target: "_blank"}, "see on IMDB"), "  ", 
+      React.createElement("button", {onClick: this.updateComment, className: "btn btn-primary"}, "Update comments"), "  ", 
+      React.createElement("button", {onClick: this.deleteMovie, className: "btn btn-warning"}, "Delete from favourite")
+      )
+      ), React.createElement("br", null), React.createElement("hr", null)
+      )
     );
   }
 });

@@ -48,12 +48,26 @@ removeDelete:function(imdbID){
 this.setState({savedMovies:temp})
 },
 
+updateComments:function(obj){
+  var temp=this.state.savedMovies;
+  for(var i=0;i<temp.length;i++){
+  if(temp[i].imdbID==obj.imdbID){
+    temp[i].comments=obj.comments;
+    break;
+  }
+}
+this.setState({savedMovies:temp})
+},
+
+
+
   render: function(){
 console.log(this.state.savedMovies);
 
       var deleteId = this.removeDelete;
+      var updateComm=this.updateComments;
       var savedMoviesArr=this.state.savedMovies.map(function(movie){
-      return(<SavedMovieLayout deleteByIdRef={deleteId} movieObject={movie} />);
+      return(<SavedMovieLayout deleteByIdRef={deleteId} movieObject={movie} updateByIdRef={updateComm} />);
     });
       return(
         <div className="container">
