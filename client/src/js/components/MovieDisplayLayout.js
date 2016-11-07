@@ -24,13 +24,13 @@ addMovie(){
 },
 
   render: function(){
-    link="http://www.imdb.com/title/"+this.props.imdbID
+    link="http://www.imdb.com/title/"+this.props.movieObject.imdbID;
     return(
       <div>
       <div className="row">
       <div className="col-lg-4">
-      <h1>{this.props.title}</h1>
-      <img src={this.props.poster} alt="Poster Image" height="400" width="300" style={{marginTop:'20'}}></img>
+      <h1>{this.props.movieObject.Title}</h1>
+      <img src={this.props.movieObject.Poster} alt="Poster Image" height="400" width="300" style={{marginTop:'20'}}></img>
       </div>
 
       <div className="col-lg-8" >
@@ -39,7 +39,7 @@ addMovie(){
       <br></br>     <br></br>       <br></br>      <br></br>
       <br></br>     <br></br>       <br></br>      <br></br>
       <br></br>     <br></br>
-    Year of Release:  <h3>{this.props.year}</h3>
+    Year of Release:  <h3>{this.props.movieObject.Year}</h3>
     <a href={link} className="btn btn-primary" target="_blank">see on IMDB</a>&nbsp;&emsp;
     <button onClick={this.addMovie} className="btn btn-warning">Add as favourite</button>
     </div>

@@ -103,14 +103,14 @@ router.route("/updatemovies/:title")
 });
 
 /* DELETE movies listing. by params */
-router.route("/deletemovies/:title")
+router.route("/deletemovies/:imdbID")
   .delete( function (req, res){
-    favmovie.remove({"Title":req.params.title},function(err,result){
+    favmovie.remove({"imdbID":req.params.imdbID},function(err,result){
       if(err){
         console.log(err);
       }
       else{
-          console.log("Movie Updated");
+          console.log("Movie Deleted");
         favmovie.find({},{__v:false, _id:false}, function(err,data) {
           if(err){
             throw err;

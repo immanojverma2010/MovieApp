@@ -3,6 +3,11 @@ var ReactDOM= require('react-dom');
 /*var SearchBox=require("./components/SearchBox.js");*/
 var DisplayBox=require("./components/DisplayBox.js");
 var NavBar=require("./components/NavBar.js");
+var Contact=require("./components/Contact.js");
+var Home=require("./components/Home.js");
+var About=require("./components/About.js");
+var Favourites=require("./components/Favourites.js");
+var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 
 var Movies = React.createClass({
   handleAjaxCall: function (movieName) {
@@ -48,8 +53,8 @@ render: function() {
   return (
     <div>
     <NavBar onSearch={this.handleAjaxCall} />
-
     <DisplayBox movieObj={this.state.movieDesc} />
+    {this.props.children}
     </div>
   )
 /*(this was removed because this functionality later added in nav-bar search box)
@@ -61,6 +66,14 @@ render: function() {
 });
 
 ReactDOM.render(
-  <Movies />,
+  <Router history={browserHistory}>
+      <Route path = "/" component = {Movies} >
+      <IndexRoute component = {Home} />
+      <Route path = "/home" component = {Home} />
+      <Route path = "/favourites" component = {Favourites} />
+       <Route path = "/about" component = {About} />
+       <Route path = "/contact" component = {Contact} />
+       </Route>
+</Router>,
   document.getElementById('app')
 );

@@ -1,14 +1,8 @@
 var React= require('react');
-
-
+var SearchBox=require('../components/SearchBox.js')
+var {Link}=require('react-router');
 
 var NavBar= React.createClass({
-  onFormSubmit: function (e) {
-  e.preventDefault();
-  var movieName=this.refs.MovieName.value;
-  this.refs.MovieName.value='';
-  this.props.onSearch(movieName);
-  },
 
   render: function(){
 
@@ -27,10 +21,16 @@ var NavBar= React.createClass({
               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul className="nav navbar-nav">
                   <li className="active">
-                    <a href="#">Home</a>
+                    <Link to="/home">Home</Link>
                   </li>
                   <li>
-                    <a href="#">About</a>
+                    <Link to="/about">About Us</Link>
+                  </li>
+                  <li>
+                    <Link to="/contact">Contact</Link>
+                  </li>
+                  <li>
+                    <Link to="/favourites">Favourites</Link>
                   </li>
                   <li className="dropdown">
                      <a href="#" className="dropdown-toggle" data-toggle="dropdown">Dropdown<strong className="caret"></strong></a>
@@ -58,17 +58,8 @@ var NavBar= React.createClass({
                   </li>
                 </ul>
 
+                <SearchBox onFind={this.props.onSearch}/>
 
-
-
-                <form onSubmit={this.onFormSubmit} className="navbar-form navbar-left">
-                  <div className="form-group">
-                    <input type="text" ref="MovieName" className="form-control" />
-                  </div>
-                  <button  className="btn btn-default">
-                    Search
-                  </button>
-                </form>
                 <ul className="nav navbar-nav navbar-right">
                   <li>
                     <a href="#">Link</a>
