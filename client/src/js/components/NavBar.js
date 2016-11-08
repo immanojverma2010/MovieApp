@@ -1,5 +1,5 @@
 var React= require('react');
-var SearchBox=require('../components/SearchBox.js')
+//var SearchBox=require('../components/SearchBox.js')
 var {Link}=require('react-router');
 
 var NavBar= React.createClass({
@@ -23,25 +23,21 @@ var NavBar= React.createClass({
                   <li className="active">
                     <Link to="/home">Home</Link>
                   </li>
-                  <li>
-                    <Link to="/about">About Us</Link>
-                  </li>
-                  <li>
-                    <Link to="/contact">Contact</Link>
-                  </li>
+
                   <li>
                     <Link to="/favourites">Favourites</Link>
                   </li>
+
                   <li className="dropdown">
                      <a href="#" className="dropdown-toggle" data-toggle="dropdown">Dropdown<strong className="caret"></strong></a>
                     <ul className="dropdown-menu">
-                      <li>
-                        <a href="#">Action</a>
-                      </li>
-                      <li>
-                        <a href="#">Another action</a>
-                      </li>
-                      <li>
+                    <li>
+                      <Link to="/about">About Us</Link>
+                    </li>
+                    <li>
+                      <Link to="/contact">Contact</Link>
+                    </li>
+                    <li>
                         <a href="#">Something else here</a>
                       </li>
                       <li className="divider">
@@ -58,7 +54,7 @@ var NavBar= React.createClass({
                   </li>
                 </ul>
 
-                <SearchBox onFind={this.props.onSearch}/>
+
 
                 <ul className="nav navbar-nav navbar-right">
                   <li>

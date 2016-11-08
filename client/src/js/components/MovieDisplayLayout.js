@@ -13,6 +13,7 @@ addMovie(){
     type:'POST',
     data:AddObject,
     success: function(data){
+      alert(data);
       console.log("movie added" +data);
     }.bind(this),
 

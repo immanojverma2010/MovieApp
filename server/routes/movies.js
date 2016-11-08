@@ -53,19 +53,32 @@ router.route("/favmovies")
   .post(function(req,res){
 if(req.body){
   req.body.comments="No comments yet....(Default movie comments)"
-
-var movieData=new favmovie(req.body);
-  movieData.save(function(err){
+  var movieData=new favmovie(req.body);
+  console.log(movieData.imdbID);
+  favmovie.findOne({imdbID:movieData.imdbID},{imdbID:true},function(err,data) {
     if(err){
-      res.send(err);
+      throw err;
+    }
+    if(data){
+     res.send("this movie is already present in your favourites");
     }
     else{
-      res.send("Your movie data is saved");
-    }
-  });
-}
 
-  });
+      console.log(data);
+
+        movieData.save(function(err){
+          if(err){
+            res.send(err);
+          }
+          else{
+            res.send("Your movie data is saved");
+          }
+        });
+
+    }
+  })
+  }
+});
 
 
 /*

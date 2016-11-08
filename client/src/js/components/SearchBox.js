@@ -6,13 +6,14 @@ onFormSubmit: function (e) {
 e.preventDefault();
 var movieName=this.refs.MovieName.value;
 this.refs.MovieName.value='';
-this.props.onFind(movieName);
+this.props.onSearch(movieName);
 },
 
   render: function(){
 
     return(
       <div>
+      <div className="container">
       <form onSubmit={this.onFormSubmit} className="navbar-form navbar-left">
         <div className="form-group">
           <input type="text" ref="MovieName" className="form-control" />
@@ -22,7 +23,7 @@ this.props.onFind(movieName);
         </button>
       </form>
       </div>
-
+      </div>
     );
   }
 });

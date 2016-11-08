@@ -26182,7 +26182,7 @@ return(React.createElement(MovieDisplayLayout, {movieObject: movie}));
 });
 
 module.exports=DisplayBox;
-},{"../components/MovieDisplayLayout.js":240,"react":232}],238:[function(require,module,exports){
+},{"../components/MovieDisplayLayout.js":241,"react":232}],238:[function(require,module,exports){
 var React= require('react');
 var SavedMovieLayout=require('../components/SavedMovieLayout.js');
 var Favourites= React.createClass({displayName: "Favourites",
@@ -26264,7 +26264,76 @@ console.log(this.state.savedMovies);
 
 
 module.exports=Favourites;
-},{"../components/SavedMovieLayout.js":242,"react":232}],239:[function(require,module,exports){
+},{"../components/SavedMovieLayout.js":243,"react":232}],239:[function(require,module,exports){
+var React= require('react');
+
+var SearchBox=require("../components/SearchBox.js");
+var DisplayBox=require("../components/DisplayBox.js");
+
+
+var FindMovie = React.createClass({displayName: "FindMovie",
+  handleAjaxCall: function (movieName) {
+
+    alert(movieName);
+    var url="https://omdbapi.com/?s="+movieName;
+
+    $.ajax({
+      url: url,
+      type: 'GET',
+      dataType: 'JSON',
+
+      success: function(data)
+      {
+        alert(data.Response);
+        if(data.Response=="False"){
+          alert("Sorry!!!..No movie by this name.");
+        }
+        else if(data.Response=="True"){
+          alert("Movie Found");
+          this.setState({movieDesc:data.Search});
+        }
+      }.bind(this),
+
+      error: function(err)
+      {
+        console.log(err);
+      }.bind(this)
+    });
+    /*
+    $.getJSON(url, function(jsonData){
+    console.log(jsonData.Search);
+    alert("Fetching Data");
+    that.setState({movieDesc:jsonData.Search});
+  });
+},
+*/
+},
+getInitialState: function() {
+  return {
+    movieDesc: []
+  };
+},
+
+
+render: function() {
+  return (
+    React.createElement("div", null, 
+    React.createElement("br", null), " ", React.createElement("br", null), " ", React.createElement("br", null), 
+    React.createElement(SearchBox, {onSearch: this.handleAjaxCall}), 
+    React.createElement("br", null), " ", React.createElement("br", null), " ", React.createElement("br", null), 
+    React.createElement(DisplayBox, {movieObj: this.state.movieDesc})
+
+    )
+  )
+  /*(this was removed because this functionality later added in nav-bar search box)
+  <SearchBox onSearch={this.handleAjaxCall} />
+  (this was added before <DisplayBox>)
+  */
+}
+
+});
+module.exports=FindMovie;
+},{"../components/DisplayBox.js":237,"../components/SearchBox.js":244,"react":232}],240:[function(require,module,exports){
 var React= require('react');
 
 var Home= React.createClass({displayName: "Home",
@@ -26278,7 +26347,7 @@ render: function(){
 })
 
 module.exports=Home
-},{"react":232}],240:[function(require,module,exports){
+},{"react":232}],241:[function(require,module,exports){
 var React= require('react');
 
 var MovieDisplayLayout= React.createClass({displayName: "MovieDisplayLayout",
@@ -26294,6 +26363,7 @@ addMovie(){
     type:'POST',
     data:AddObject,
     success: function(data){
+      alert(data);
       console.log("movie added" +data);
     }.bind(this),
 
@@ -26331,9 +26401,9 @@ addMovie(){
 });
 
 module.exports=MovieDisplayLayout;
-},{"react":232}],241:[function(require,module,exports){
+},{"react":232}],242:[function(require,module,exports){
 var React= require('react');
-var SearchBox=require('../components/SearchBox.js')
+//var SearchBox=require('../components/SearchBox.js')
 var {Link}=require('react-router');
 
 var NavBar= React.createClass({displayName: "NavBar",
@@ -26357,25 +26427,21 @@ var NavBar= React.createClass({displayName: "NavBar",
                   React.createElement("li", {className: "active"}, 
                     React.createElement(Link, {to: "/home"}, "Home")
                   ), 
-                  React.createElement("li", null, 
-                    React.createElement(Link, {to: "/about"}, "About Us")
-                  ), 
-                  React.createElement("li", null, 
-                    React.createElement(Link, {to: "/contact"}, "Contact")
-                  ), 
+
                   React.createElement("li", null, 
                     React.createElement(Link, {to: "/favourites"}, "Favourites")
                   ), 
+
                   React.createElement("li", {className: "dropdown"}, 
                      React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, "Dropdown", React.createElement("strong", {className: "caret"})), 
                     React.createElement("ul", {className: "dropdown-menu"}, 
-                      React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "Action")
-                      ), 
-                      React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "Another action")
-                      ), 
-                      React.createElement("li", null, 
+                    React.createElement("li", null, 
+                      React.createElement(Link, {to: "/about"}, "About Us")
+                    ), 
+                    React.createElement("li", null, 
+                      React.createElement(Link, {to: "/contact"}, "Contact")
+                    ), 
+                    React.createElement("li", null, 
                         React.createElement("a", {href: "#"}, "Something else here")
                       ), 
                       React.createElement("li", {className: "divider"}
@@ -26392,7 +26458,7 @@ var NavBar= React.createClass({displayName: "NavBar",
                   )
                 ), 
 
-                React.createElement(SearchBox, {onFind: this.props.onSearch}), 
+
 
                 React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
                   React.createElement("li", null, 
@@ -26434,7 +26500,7 @@ var NavBar= React.createClass({displayName: "NavBar",
 });
 
 module.exports=NavBar;
-},{"../components/SearchBox.js":243,"react":232,"react-router":81}],242:[function(require,module,exports){
+},{"react":232,"react-router":81}],243:[function(require,module,exports){
 var React= require('react');
 
 var SavedMovieLayout= React.createClass({displayName: "SavedMovieLayout",
@@ -26522,7 +26588,7 @@ var SavedMovieLayout= React.createClass({displayName: "SavedMovieLayout",
 });
 
 module.exports=SavedMovieLayout;
-},{"react":232}],243:[function(require,module,exports){
+},{"react":232}],244:[function(require,module,exports){
 var React= require('react');
 
 var SearchBox= React.createClass({displayName: "SearchBox",
@@ -26531,13 +26597,14 @@ onFormSubmit: function (e) {
 e.preventDefault();
 var movieName=this.refs.MovieName.value;
 this.refs.MovieName.value='';
-this.props.onFind(movieName);
+this.props.onSearch(movieName);
 },
 
   render: function(){
 
     return(
       React.createElement("div", null, 
+      React.createElement("div", {className: "container"}, 
       React.createElement("form", {onSubmit: this.onFormSubmit, className: "navbar-form navbar-left"}, 
         React.createElement("div", {className: "form-group"}, 
           React.createElement("input", {type: "text", ref: "MovieName", className: "form-control"})
@@ -26547,90 +26614,55 @@ this.props.onFind(movieName);
         )
       )
       )
-
+      )
     );
   }
 });
 
 module.exports=SearchBox;
-},{"react":232}],244:[function(require,module,exports){
+},{"react":232}],245:[function(require,module,exports){
 var React= require('react');
 var ReactDOM= require('react-dom');
-/*var SearchBox=require("./components/SearchBox.js");*/
+var SearchBox=require("./components/SearchBox.js");
 var DisplayBox=require("./components/DisplayBox.js");
 var NavBar=require("./components/NavBar.js");
 var Contact=require("./components/Contact.js");
 var Home=require("./components/Home.js");
 var About=require("./components/About.js");
 var Favourites=require("./components/Favourites.js");
+var FindMovie=require("./components/FindMovie.js");
 var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 
-var Movies = React.createClass({displayName: "Movies",
-  handleAjaxCall: function (movieName) {
+var MainComponent = React.createClass({displayName: "MainComponent",
 
-    alert(movieName);
-    var url="https://omdbapi.com/?s="+movieName;
+  render: function() {
+    return (
+      React.createElement("div", null, 
+      React.createElement(NavBar, null), 
+          
+      this.props.children
 
-    $.ajax({
-      url: url,
-      type: 'GET',
-      dataType: 'JSON',
-
-      success: function(data)
-      {
-        alert(data.Response);
-        if(data.Response=="True"){
-          alert("coming inside");
-        this.setState({movieDesc:data.Search});
-        }
-      }.bind(this),
-
-      error: function(err)
-      {
-        console.log(err);
-      }.bind(this)
-    });
-    /*
-    $.getJSON(url, function(jsonData){
-    console.log(jsonData.Search);
-    alert("Fetching Data");
-    that.setState({movieDesc:jsonData.Search});
-  });
-},
-*/
-},
-getInitialState: function() {
-  return {
-    movieDesc: []
-  };
-},
-
-render: function() {
-  return (
-    React.createElement("div", null, 
-    React.createElement(NavBar, {onSearch: this.handleAjaxCall}), 
-    React.createElement(DisplayBox, {movieObj: this.state.movieDesc}), 
-    this.props.children
+      )
     )
-  )
-/*(this was removed because this functionality later added in nav-bar search box)
-<SearchBox onSearch={this.handleAjaxCall} />
-(this was added before <DisplayBox>)
-*/
-}
+    /*(this was removed because this functionality later added in nav-bar search box)
+    <SearchBox onSearch={this.handleAjaxCall} />
+    (this was added before <DisplayBox>)
+    */
+  }
 
 });
 
 ReactDOM.render(
   React.createElement(Router, {history: browserHistory}, 
-      React.createElement(Route, {path: "/", component: Movies}, 
-      React.createElement(IndexRoute, {component: Home}), 
-      React.createElement(Route, {path: "/home", component: Home}), 
-      React.createElement(Route, {path: "/favourites", component: Favourites}), 
-       React.createElement(Route, {path: "/about", component: About}), 
-       React.createElement(Route, {path: "/contact", component: Contact})
-       )
-),
+  React.createElement(Route, {path: "/", component: MainComponent}, 
+  React.createElement(IndexRoute, {component: FindMovie}), 
+  React.createElement(Route, {path: "/home", component: Home}), 
+  React.createElement(Route, {path: "/favourites", component: Favourites}), 
+  React.createElement(Route, {path: "/searchbox", component: SearchBox}), 
+  React.createElement(Route, {path: "/about", component: About}), 
+  React.createElement(Route, {path: "/contact", component: Contact})
+  )
+  ),
   document.getElementById('app')
 );
-},{"./components/About.js":235,"./components/Contact.js":236,"./components/DisplayBox.js":237,"./components/Favourites.js":238,"./components/Home.js":239,"./components/NavBar.js":241,"react":232,"react-dom":51,"react-router":81}]},{},[244]);
+},{"./components/About.js":235,"./components/Contact.js":236,"./components/DisplayBox.js":237,"./components/Favourites.js":238,"./components/FindMovie.js":239,"./components/Home.js":240,"./components/NavBar.js":242,"./components/SearchBox.js":244,"react":232,"react-dom":51,"react-router":81}]},{},[245]);

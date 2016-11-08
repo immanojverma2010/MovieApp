@@ -11,16 +11,16 @@ router.get('/', function(req, res, next) {
 router.route("/add")
  .post(function (req,res) {
    if(req.body){
-/*
+
 var userVar =new User();
 userVar.username=req.body.username;
 userVar.password=req.body.password;
-userVar.save(function(err){
+/*userVar.save(function(err){
 .
 ..
 });
 */
-     var userVar=new User(req.body);
+     //var userVar=new User(req.body);
      userVar.save(function(err){
        if(err){
          res.send(err);
