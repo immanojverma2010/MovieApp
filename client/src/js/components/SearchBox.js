@@ -14,9 +14,9 @@ this.props.onSearch(movieName);
     return(
       <div>
       <div className="container">
-      <form onSubmit={this.onFormSubmit} className="navbar-form navbar-left">
+      <form onSubmit={this.onFormSubmit} className="navbar-form center">
         <div className="form-group">
-          <input type="text" ref="MovieName" className="form-control" />
+          <input type="text" ref="MovieName" className="form-control" name="Search your movie"/>
         </div>
         <button  className="btn btn-default">
           Search

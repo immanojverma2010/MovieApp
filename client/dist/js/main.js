@@ -26403,7 +26403,7 @@ addMovie(){
 module.exports=MovieDisplayLayout;
 },{"react":232}],242:[function(require,module,exports){
 var React= require('react');
-//var SearchBox=require('../components/SearchBox.js')
+var FindMovie=require('../components/FindMovie.js')
 var {Link}=require('react-router');
 
 var NavBar= React.createClass({displayName: "NavBar",
@@ -26458,7 +26458,7 @@ var NavBar= React.createClass({displayName: "NavBar",
                   )
                 ), 
 
-
+          
 
                 React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
                   React.createElement("li", null, 
@@ -26500,7 +26500,7 @@ var NavBar= React.createClass({displayName: "NavBar",
 });
 
 module.exports=NavBar;
-},{"react":232,"react-router":81}],243:[function(require,module,exports){
+},{"../components/FindMovie.js":239,"react":232,"react-router":81}],243:[function(require,module,exports){
 var React= require('react');
 
 var SavedMovieLayout= React.createClass({displayName: "SavedMovieLayout",
@@ -26605,9 +26605,9 @@ this.props.onSearch(movieName);
     return(
       React.createElement("div", null, 
       React.createElement("div", {className: "container"}, 
-      React.createElement("form", {onSubmit: this.onFormSubmit, className: "navbar-form navbar-left"}, 
+      React.createElement("form", {onSubmit: this.onFormSubmit, className: "navbar-form center"}, 
         React.createElement("div", {className: "form-group"}, 
-          React.createElement("input", {type: "text", ref: "MovieName", className: "form-control"})
+          React.createElement("input", {type: "text", ref: "MovieName", className: "form-control", name: "Search your movie"})
         ), 
         React.createElement("button", {className: "btn btn-default"}, 
           "Search"

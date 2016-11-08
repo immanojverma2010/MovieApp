@@ -1,5 +1,5 @@
 var React= require('react');
-//var SearchBox=require('../components/SearchBox.js')
+var FindMovie=require('../components/FindMovie.js')
 var {Link}=require('react-router');
 
 var NavBar= React.createClass({
@@ -54,7 +54,7 @@ var NavBar= React.createClass({
                   </li>
                 </ul>
 
-
+          
 
                 <ul className="nav navbar-nav navbar-right">
                   <li>

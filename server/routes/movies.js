@@ -102,7 +102,8 @@ router.route("/updatemovies")
           }
           else{
               console.log("Movie Updated");
-            favmovie.find({},{__v:false, _id:false}, function(err,data) {
+              res.send("Comments Updated")
+            /*favmovie.find({},{__v:false, _id:false}, function(err,data) {
               if(err){
                 throw err;
               }
@@ -113,6 +114,7 @@ router.route("/updatemovies")
               }
 
             });
+            */
           }
 });
 });
@@ -126,6 +128,7 @@ router.route("/deletemovies/:imdbID")
       }
       else{
           console.log("Movie Deleted");
+/*
         favmovie.find({},{__v:false, _id:false}, function(err,data) {
           if(err){
             throw err;
@@ -136,6 +139,8 @@ router.route("/deletemovies/:imdbID")
           }
 
     });
+    */
+    res.send("movie deleted")
   }
 });
 });
