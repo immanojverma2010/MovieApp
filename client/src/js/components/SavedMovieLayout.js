@@ -61,22 +61,25 @@ var SavedMovieLayout= React.createClass({
     link="http://www.imdb.com/title/"+this.props.movieObject.imdbID;
     return(
       <div>
-      <div className="row">
+      <div className="row" >
       <div className="col-lg-4">
       <h1>{this.props.movieObject.Title}</h1>
       <img src={this.props.movieObject.Poster} alt="Poster Image" height="400" width="300" style={{marginTop:'20'}}></img>
       </div>
 
-      <div className="col-lg-8" >
-      <br></br>    <br></br>     <br></br>     <br></br>
+      <div className="col-lg-6" >
       <br></br>     <br></br>       <br></br>      <br></br>
       <br></br>     <br></br>       <br></br>      <br></br>
-      <h3>Comments:</h3><p>{this.props.movieObject.comments} </p>      
+      <br></br>
+
+      <h3>Comments:</h3>
+      <div className="well"><p>{this.props.movieObject.comments} </p></div>
+
       <br></br>     <br></br>
-      Year of Release:  <h3>{this.props.movieObject.Year}</h3>
-      <a href={link} className="btn btn-primary" target="_blank">see on IMDB</a>&nbsp;&emsp;
-      <button onClick={this.updateComment} className="btn btn-primary">Update comments</button>&nbsp;&emsp;
-      <button onClick={this.deleteMovie} className="btn btn-warning">Delete from favourite</button>
+      <h3>Year of Release: {this.props.movieObject.Year}</h3>
+      <a href={link} className="btn btn-primary" target="_blank"><span className="glyphicon glyphicon-share-alt"></span> See on IMDB</a>&nbsp;&emsp;
+      <button onClick={this.updateComment} className="btn btn-primary"><span className="glyphicon glyphicon-comment"></span> Update comments</button>&nbsp;&emsp;
+      <button onClick={this.deleteMovie} className="btn btn-warning"><span className="glyphicon glyphicon-remove"></span> Delete from favourite</button>
       </div>
       </div><br></br><hr></hr>
       </div>

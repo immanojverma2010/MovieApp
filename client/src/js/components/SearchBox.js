@@ -12,18 +12,23 @@ this.props.onSearch(movieName);
   render: function(){
 
     return(
-      <div>
-      <div className="container">
+
+      <div className="well">
+      <div className="container text-center">
+      <h1>Search Movie</h1>
+      <br></br>
       <form onSubmit={this.onFormSubmit} className="navbar-form center">
         <div className="form-group">
-          <input type="text" ref="MovieName" className="form-control" name="Search your movie"/>
+          <input type="text" ref="MovieName" className="form-control" />&emsp;&emsp;
         </div>
-        <button  className="btn btn-default">
-          Search
+        <button  className="btn btn-primary">
+        <span className="glyphicon glyphicon-search"></span>  Search
         </button>
       </form>
       </div>
       </div>
+
+
     );
   }
 });

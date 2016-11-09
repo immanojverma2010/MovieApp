@@ -51,7 +51,7 @@ getInitialState: function() {
 render: function() {
   return (
     <div>
-    <br></br> <br></br> <br></br>
+    
     <SearchBox onSearch={this.handleAjaxCall} />
     <br></br> <br></br> <br></br>
     <DisplayBox movieObj={this.state.movieDesc} />

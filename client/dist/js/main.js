@@ -26138,7 +26138,7 @@ var About= React.createClass({displayName: "About",
 render: function(){
   return(
 
-    React.createElement("div", null, 
+    React.createElement("div", {className: "container"}, 
     "This is an about page...!!!"
     )
   )
@@ -26152,7 +26152,7 @@ var React= require('react');
 var Contact= React.createClass({displayName: "Contact",
 render: function(){
   return(
-    React.createElement("div", null, 
+    React.createElement("div", {className: "container"}, 
     React.createElement("h1", null, "You can contact us on abc@gmail.com or call us on 9876543210")
     )
   )
@@ -26182,7 +26182,7 @@ return(React.createElement(MovieDisplayLayout, {movieObject: movie}));
 });
 
 module.exports=DisplayBox;
-},{"../components/MovieDisplayLayout.js":241,"react":232}],238:[function(require,module,exports){
+},{"../components/MovieDisplayLayout.js":242,"react":232}],238:[function(require,module,exports){
 var React= require('react');
 var SavedMovieLayout=require('../components/SavedMovieLayout.js');
 var Favourites= React.createClass({displayName: "Favourites",
@@ -26264,7 +26264,7 @@ console.log(this.state.savedMovies);
 
 
 module.exports=Favourites;
-},{"../components/SavedMovieLayout.js":243,"react":232}],239:[function(require,module,exports){
+},{"../components/SavedMovieLayout.js":244,"react":232}],239:[function(require,module,exports){
 var React= require('react');
 
 var SearchBox=require("../components/SearchBox.js");
@@ -26318,7 +26318,7 @@ getInitialState: function() {
 render: function() {
   return (
     React.createElement("div", null, 
-    React.createElement("br", null), " ", React.createElement("br", null), " ", React.createElement("br", null), 
+    
     React.createElement(SearchBox, {onSearch: this.handleAjaxCall}), 
     React.createElement("br", null), " ", React.createElement("br", null), " ", React.createElement("br", null), 
     React.createElement(DisplayBox, {movieObj: this.state.movieDesc})
@@ -26333,21 +26333,88 @@ render: function() {
 
 });
 module.exports=FindMovie;
-},{"../components/DisplayBox.js":237,"../components/SearchBox.js":244,"react":232}],240:[function(require,module,exports){
+},{"../components/DisplayBox.js":237,"../components/SearchBox.js":245,"react":232}],240:[function(require,module,exports){
 var React= require('react');
+var {Link}=require('react-router');
+var Footer= React.createClass({displayName: "Footer",
+render: function(){
+  return(
+    React.createElement("div", {className: "footer navbar-fixed-bottom"}, 
+    React.createElement("footer", {id: "pg-footer", style: {backgroundColor:"black"}}, 
+      React.createElement("div", {className: "container"}, 
+        React.createElement("div", {className: "row"}, 
+          React.createElement("div", {className: "col-sm-4"}, 
+            React.createElement("h6", null, "Copyright © 2016 Travel Tours. All Rights Reserved")
+          ), 
+
+
+
+          React.createElement("div", {className: "col-sm-4"}, 
+            React.createElement("h6", null, "Navigation"), 
+            React.createElement("ul", {className: "unstyled"}, 
+
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/home"}, "Home")
+              ), 
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/about"}, "About Us")
+              ), 
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/contact"}, "Contact")
+              ), 
+
+              React.createElement("li", null, 
+                React.createElement(Link, {to: "/favourites"}, "Favourites")
+              )
+
+
+            )
+          ), 
+
+          React.createElement("div", {className: "col-sm-2"}, 
+            React.createElement("h6", null, "Follow Us"), 
+            React.createElement("ul", {className: "unstyled"}, 
+              React.createElement("li", {className: "logo"}, React.createElement("a", {href: "#pg-footer", className: "fa fa-facebook-official", "aria-hidden": "true"})), 
+              React.createElement("li", {className: "logo"}, React.createElement("a", {href: "#pg-footer", className: "fa fa-twitter", "aria-hidden": "true"})), 
+              React.createElement("li", {className: "logo"}, React.createElement("a", {href: "#pg-footer", className: "fa fa-instagram", "aria-hidden": "true"}))
+            )
+          ), 
+
+          React.createElement("div", {className: "col-sm-2"}, 
+            React.createElement("h6", null, "Coded with ", React.createElement("span", {className: "glyphicon glyphicon-heart"}), " by Brad")
+          )
+        )
+      )
+    )
+    )
+
+
+
+
+  );
+}
+})
+
+module.exports=Footer
+},{"react":232,"react-router":81}],241:[function(require,module,exports){
+var React= require('react');
+var FindMovie=require("../components/FindMovie.js");
 
 var Home= React.createClass({displayName: "Home",
 render: function(){
   return(
     React.createElement("div", null, 
+    React.createElement(FindMovie, null), 
+    React.createElement("div", {className: "container"}, 
     React.createElement("h1", null, "Hello User!!!! ")
+    )
     )
   );
 }
 })
 
 module.exports=Home
-},{"react":232}],241:[function(require,module,exports){
+},{"../components/FindMovie.js":239,"react":232}],242:[function(require,module,exports){
 var React= require('react');
 
 var MovieDisplayLayout= React.createClass({displayName: "MovieDisplayLayout",
@@ -26390,9 +26457,9 @@ addMovie(){
       React.createElement("br", null), "     ", React.createElement("br", null), "       ", React.createElement("br", null), "      ", React.createElement("br", null), 
       React.createElement("br", null), "     ", React.createElement("br", null), "       ", React.createElement("br", null), "      ", React.createElement("br", null), 
       React.createElement("br", null), "     ", React.createElement("br", null), 
-    "Year of Release:  ", React.createElement("h3", null, this.props.movieObject.Year), 
-    React.createElement("a", {href: link, className: "btn btn-primary", target: "_blank"}, "see on IMDB"), "  ", 
-    React.createElement("button", {onClick: this.addMovie, className: "btn btn-warning"}, "Add as favourite")
+    React.createElement("h3", null, "Year of Release:  ", this.props.movieObject.Year), 
+    React.createElement("a", {href: link, className: "btn btn-primary", target: "_blank"}, React.createElement("span", {className: "glyphicon glyphicon-share-alt"}), " See on IMDB"), "  ", 
+    React.createElement("button", {onClick: this.addMovie, className: "btn btn-warning"}, React.createElement("span", {className: "glyphicon glyphicon-star"}), " Add as favourite")
     )
     ), React.createElement("br", null), React.createElement("hr", null)
     )
@@ -26401,7 +26468,7 @@ addMovie(){
 });
 
 module.exports=MovieDisplayLayout;
-},{"react":232}],242:[function(require,module,exports){
+},{"react":232}],243:[function(require,module,exports){
 var React= require('react');
 var FindMovie=require('../components/FindMovie.js')
 var {Link}=require('react-router');
@@ -26411,78 +26478,55 @@ var NavBar= React.createClass({displayName: "NavBar",
   render: function(){
 
     return(
-      React.createElement("div", {className: "container-fluid container"}, 
+      React.createElement("div", {className: "container-fluid "}, 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-12"}, 
             React.createElement("nav", {className: "navbar navbar-default navbar-inverse", role: "navigation"}, 
+              React.createElement("div", {className: "container"}, 
               React.createElement("div", {className: "navbar-header"}, 
 
                 React.createElement("button", {type: "button", className: "navbar-toggle", "data-toggle": "collapse", "data-target": "#bs-example-navbar-collapse-1"}, 
                    React.createElement("span", {className: "sr-only"}, "Toggle navigation"), React.createElement("span", {className: "icon-bar"}), React.createElement("span", {className: "icon-bar"}), React.createElement("span", {className: "icon-bar"})
-                ), " ", React.createElement("a", {className: "navbar-brand", href: "#"}, "MovieInfo")
-              ), 
+                ), React.createElement(Link, {className: "navbar-brand", to: "/home"}, "MovieInfo")
+                              ), 
 
               React.createElement("div", {className: "collapse navbar-collapse", id: "bs-example-navbar-collapse-1"}, 
-                React.createElement("ul", {className: "nav navbar-nav"}, 
-                  React.createElement("li", {className: "active"}, 
-                    React.createElement(Link, {to: "/home"}, "Home")
-                  ), 
 
-                  React.createElement("li", null, 
-                    React.createElement(Link, {to: "/favourites"}, "Favourites")
-                  ), 
-
-                  React.createElement("li", {className: "dropdown"}, 
-                     React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, "Dropdown", React.createElement("strong", {className: "caret"})), 
-                    React.createElement("ul", {className: "dropdown-menu"}, 
-                    React.createElement("li", null, 
-                      React.createElement(Link, {to: "/about"}, "About Us")
-                    ), 
-                    React.createElement("li", null, 
-                      React.createElement(Link, {to: "/contact"}, "Contact")
-                    ), 
-                    React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "Something else here")
-                      ), 
-                      React.createElement("li", {className: "divider"}
-                      ), 
-                      React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "Separated link")
-                      ), 
-                      React.createElement("li", {className: "divider"}
-                      ), 
-                      React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "One more separated link")
-                      )
-                    )
-                  )
-                ), 
-
-          
 
                 React.createElement("ul", {className: "nav navbar-nav navbar-right"}, 
-                  React.createElement("li", null, 
-                    React.createElement("a", {href: "#"}, "Link")
-                  ), 
-                  React.createElement("li", {className: "dropdown"}, 
-                     React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, "MyAccount", React.createElement("strong", {className: "caret"})), 
+                React.createElement("li", {className: "active"}, 
+                  React.createElement(Link, {to: "/home"}, "Home")
+                ), 
+                React.createElement("li", null, 
+                  React.createElement(Link, {to: "/about"}, "About Us")
+                ), 
+                React.createElement("li", null, 
+                  React.createElement(Link, {to: "/contact"}, "Contact")
+                ), 
+
+                React.createElement("li", null, 
+                  React.createElement(Link, {to: "/favourites"}, "Favourites")
+                ), 
+                React.createElement("li", {className: "dropdown"}, 
+                     React.createElement("a", {href: "#", className: "dropdown-toggle", "data-toggle": "dropdown"}, React.createElement("span", {className: "glyphicon glyphicon-user"}), "MyAccount", React.createElement("strong", {className: "caret"})), 
                     React.createElement("ul", {className: "dropdown-menu"}, 
-                      React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "Action")
+                    React.createElement("li", null, 
+                        React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-wrench"}), " Settings")
                       ), 
                       React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "Another action")
+                        React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-refresh"}), " Update Profile")
                       ), 
                       React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "Something else here")
+                        React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-briefcase"}), " Billing")
                       ), 
                       React.createElement("li", {className: "divider"}
                       ), 
                       React.createElement("li", null, 
-                        React.createElement("a", {href: "#"}, "Separated link")
+                        React.createElement("a", {href: "#"}, React.createElement("span", {className: "glyphicon glyphicon-off"}), " LogOut")
                       )
                     )
                   )
+                )
                 )
               )
 
@@ -26500,7 +26544,7 @@ var NavBar= React.createClass({displayName: "NavBar",
 });
 
 module.exports=NavBar;
-},{"../components/FindMovie.js":239,"react":232,"react-router":81}],243:[function(require,module,exports){
+},{"../components/FindMovie.js":239,"react":232,"react-router":81}],244:[function(require,module,exports){
 var React= require('react');
 
 var SavedMovieLayout= React.createClass({displayName: "SavedMovieLayout",
@@ -26570,16 +26614,19 @@ var SavedMovieLayout= React.createClass({displayName: "SavedMovieLayout",
       React.createElement("img", {src: this.props.movieObject.Poster, alt: "Poster Image", height: "400", width: "300", style: {marginTop:'20'}})
       ), 
 
-      React.createElement("div", {className: "col-lg-8"}, 
-      React.createElement("br", null), "    ", React.createElement("br", null), "     ", React.createElement("br", null), "     ", React.createElement("br", null), 
+      React.createElement("div", {className: "col-lg-6"}, 
       React.createElement("br", null), "     ", React.createElement("br", null), "       ", React.createElement("br", null), "      ", React.createElement("br", null), 
       React.createElement("br", null), "     ", React.createElement("br", null), "       ", React.createElement("br", null), "      ", React.createElement("br", null), 
-      React.createElement("h3", null, "Comments:"), React.createElement("p", null, this.props.movieObject.comments, " "), 
+      React.createElement("br", null), 
+
+      React.createElement("h3", null, "Comments:"), 
+      React.createElement("div", {className: "well"}, React.createElement("p", null, this.props.movieObject.comments, " ")), 
+
       React.createElement("br", null), "     ", React.createElement("br", null), 
-      "Year of Release:  ", React.createElement("h3", null, this.props.movieObject.Year), 
-      React.createElement("a", {href: link, className: "btn btn-primary", target: "_blank"}, "see on IMDB"), "  ", 
-      React.createElement("button", {onClick: this.updateComment, className: "btn btn-primary"}, "Update comments"), "  ", 
-      React.createElement("button", {onClick: this.deleteMovie, className: "btn btn-warning"}, "Delete from favourite")
+      React.createElement("h3", null, "Year of Release: ", this.props.movieObject.Year), 
+      React.createElement("a", {href: link, className: "btn btn-primary", target: "_blank"}, React.createElement("span", {className: "glyphicon glyphicon-share-alt"}), " See on IMDB"), "  ", 
+      React.createElement("button", {onClick: this.updateComment, className: "btn btn-primary"}, React.createElement("span", {className: "glyphicon glyphicon-comment"}), " Update comments"), "  ", 
+      React.createElement("button", {onClick: this.deleteMovie, className: "btn btn-warning"}, React.createElement("span", {className: "glyphicon glyphicon-remove"}), " Delete from favourite")
       )
       ), React.createElement("br", null), React.createElement("hr", null)
       )
@@ -26588,7 +26635,7 @@ var SavedMovieLayout= React.createClass({displayName: "SavedMovieLayout",
 });
 
 module.exports=SavedMovieLayout;
-},{"react":232}],244:[function(require,module,exports){
+},{"react":232}],245:[function(require,module,exports){
 var React= require('react');
 
 var SearchBox= React.createClass({displayName: "SearchBox",
@@ -26603,24 +26650,29 @@ this.props.onSearch(movieName);
   render: function(){
 
     return(
-      React.createElement("div", null, 
-      React.createElement("div", {className: "container"}, 
+
+      React.createElement("div", {className: "well"}, 
+      React.createElement("div", {className: "container text-center"}, 
+      React.createElement("h1", null, "Search Movie"), 
+      React.createElement("br", null), 
       React.createElement("form", {onSubmit: this.onFormSubmit, className: "navbar-form center"}, 
         React.createElement("div", {className: "form-group"}, 
-          React.createElement("input", {type: "text", ref: "MovieName", className: "form-control", name: "Search your movie"})
+          React.createElement("input", {type: "text", ref: "MovieName", className: "form-control"}), "  "
         ), 
-        React.createElement("button", {className: "btn btn-default"}, 
-          "Search"
+        React.createElement("button", {className: "btn btn-primary"}, 
+        React.createElement("span", {className: "glyphicon glyphicon-search"}), "  Search"
         )
       )
       )
       )
+
+
     );
   }
 });
 
 module.exports=SearchBox;
-},{"react":232}],245:[function(require,module,exports){
+},{"react":232}],246:[function(require,module,exports){
 var React= require('react');
 var ReactDOM= require('react-dom');
 var SearchBox=require("./components/SearchBox.js");
@@ -26631,6 +26683,7 @@ var Home=require("./components/Home.js");
 var About=require("./components/About.js");
 var Favourites=require("./components/Favourites.js");
 var FindMovie=require("./components/FindMovie.js");
+var Footer=require("./components/Footer.js");
 var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 
 var MainComponent = React.createClass({displayName: "MainComponent",
@@ -26639,9 +26692,9 @@ var MainComponent = React.createClass({displayName: "MainComponent",
     return (
       React.createElement("div", null, 
       React.createElement(NavBar, null), 
-          
-      this.props.children
-
+      this.props.children, 
+      React.createElement("br", null), " ", React.createElement("br", null), " ", React.createElement("br", null), " ", React.createElement("br", null), " ", React.createElement("br", null), 
+      React.createElement(Footer, null)
       )
     )
     /*(this was removed because this functionality later added in nav-bar search box)
@@ -26665,4 +26718,4 @@ ReactDOM.render(
   ),
   document.getElementById('app')
 );
-},{"./components/About.js":235,"./components/Contact.js":236,"./components/DisplayBox.js":237,"./components/Favourites.js":238,"./components/FindMovie.js":239,"./components/Home.js":240,"./components/NavBar.js":242,"./components/SearchBox.js":244,"react":232,"react-dom":51,"react-router":81}]},{},[245]);
+},{"./components/About.js":235,"./components/Contact.js":236,"./components/DisplayBox.js":237,"./components/Favourites.js":238,"./components/FindMovie.js":239,"./components/Footer.js":240,"./components/Home.js":241,"./components/NavBar.js":243,"./components/SearchBox.js":245,"react":232,"react-dom":51,"react-router":81}]},{},[246]);

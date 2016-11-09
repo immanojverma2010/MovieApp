@@ -8,6 +8,7 @@ var Home=require("./components/Home.js");
 var About=require("./components/About.js");
 var Favourites=require("./components/Favourites.js");
 var FindMovie=require("./components/FindMovie.js");
+var Footer=require("./components/Footer.js");
 var {browserHistory, Route, Router, IndexRoute} = require('react-router');
 
 var MainComponent = React.createClass({
@@ -16,9 +17,9 @@ var MainComponent = React.createClass({
     return (
       <div>
       <NavBar />
-          
       {this.props.children}
-
+      <br></br> <br></br> <br></br> <br></br> <br></br>
+      <Footer />
       </div>
     )
     /*(this was removed because this functionality later added in nav-bar search box)

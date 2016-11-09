@@ -40,9 +40,9 @@ addMovie(){
       <br></br>     <br></br>       <br></br>      <br></br>
       <br></br>     <br></br>       <br></br>      <br></br>
       <br></br>     <br></br>
-    Year of Release:  <h3>{this.props.movieObject.Year}</h3>
-    <a href={link} className="btn btn-primary" target="_blank">see on IMDB</a>&nbsp;&emsp;
-    <button onClick={this.addMovie} className="btn btn-warning">Add as favourite</button>
+    <h3>Year of Release:  {this.props.movieObject.Year}</h3>
+    <a href={link} className="btn btn-primary" target="_blank"><span className="glyphicon glyphicon-share-alt"></span> See on IMDB</a>&nbsp;&emsp;
+    <button onClick={this.addMovie} className="btn btn-warning"><span className="glyphicon glyphicon-star"></span> Add as favourite</button>
     </div>
     </div><br></br><hr></hr>
     </div>
